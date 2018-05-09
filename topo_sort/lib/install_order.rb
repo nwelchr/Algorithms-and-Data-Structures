@@ -29,3 +29,58 @@ def install_order(arr)
 
     sorted.map { |v| v.value }
 end
+
+def install_order2(arr)
+    vertices = {}
+    arr.each do |tuple|
+        to = tuple[0]
+        from = tuple[1]
+
+        vertices[to] = Vertex.new(to) unless vertices[to]
+        vertices[from] = Vertex.new(from) unless vertices[from] && !from # accounts for nil
+        Edge.new(vertices[from], vertices[to]) if from
+    end
+
+    topological_sort(vertices.values).map { |v| v.value }
+end
+
+arr = [["mocha", "browserify"], ["bower", "browserify"], ["underscore", "cheerio"],
+       ["mocha", "underscore"], ["mocha", "bower"], ["passport", "mocha"],
+       ["hapi", "browserify"], ["browserify", nil], ["cheerio", nil]]
+
+arr2 = [["mocha", "browserify"], ["bower", "browserify"], ["underscore", "cheerio"],
+["mocha", "underscore"], ["mocha", "bower"], ["passport", "mocha"],
+["hapi", "browserify"]]
+
+p install_order2(arr)
+p install_order2(arr2)
+
+def alien_sort(dict)
+
+    vertices = {}
+
+    (0...dict.length - 1).each do |i|
+        word1 = dict[i]
+        word2 = dict[i + 1]
+
+        counter = 0
+        while true
+            letter1 = word1[counter]
+            letter2 = word2[counter]
+            break if !letter1 || !letter2
+            vertices[letter1] = Vertex.new(letter1) unless vertices[letter1]
+            vertices[letter2] = Vertex.new(letter2) unless vertices[letter2]
+            if letter1 != letter2
+                Edge.new(vertices[letter1], vertices[letter2])
+                break
+            end
+            counter += 1
+        end
+    end
+
+    topological_sort(vertices.values).map { |v| v.value }
+end
+
+input_dict = ["baa", "abcd", "abca", "cab", "cad"]
+other_input_dict = ["caa", "aaa", "aab"]
+p alien_sort(input_dict)
