@@ -5,7 +5,7 @@ end
 def peak_helper(arr, l, r)
   mid = l + (r - l) / 2
   # found target
-  if ((mid == 0 && arr[mid + 1] <= arr[mid]) || (mid == arr.length - 1 && arr[mid - 1] <= arr[mid]))
+  if ((mid == 0 || arr[mid - 1] <= arr[mid]) && (mid == arr.length - 1 || arr[mid + 1] <= arr[mid]))
     return mid
   # target smaller than midpoint of subsection of arr
   # pare down array to be l until midpoint - 1
