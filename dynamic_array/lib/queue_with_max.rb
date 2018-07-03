@@ -10,7 +10,10 @@ class QueueWithMax
 
   def enqueue(el)
     @store.push(el)
-    update_maxque(el)
+    while @maxque.length > 0 && @maxque[@maxque.length-1] < el
+      @maxque.pop
+    end
+    @maxque.push(el)
   end
 
   def dequeue
@@ -21,13 +24,6 @@ class QueueWithMax
 
   def max
     @maxque[0] if @maxque.length > 0
-  end
-
-  def update_maxque(el)
-    while @maxque.length > 0 && @maxque[@maxque.length-1] < el
-      @maxque.pop
-    end
-    @maxque.push(el)
   end
 
   def length
