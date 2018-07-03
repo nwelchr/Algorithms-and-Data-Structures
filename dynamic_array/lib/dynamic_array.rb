@@ -25,8 +25,14 @@ class DynamicArray
   # O(1)
   def pop
     raise "index out of bounds" unless length > 0
+
+    # save popped value for return
     val = self[length - 1]
+
+    # remove last value
     self[length - 1] = nil
+
+    # decrement length
     self.length -= 1
 
     val
@@ -54,6 +60,7 @@ class DynamicArray
   end
 
   # O(n): has to shift over all the elements.
+  # This gets fixed with a ring buffer.
   def unshift(val)
     resize! if length == capacity
 
@@ -68,6 +75,7 @@ class DynamicArray
   attr_accessor :capacity, :store
   attr_writer :length
 
+  # checks whether index is within bounds
   def check_index(index)
     raise "index out of bounds" unless (index >= 0) && (index < length)
   end

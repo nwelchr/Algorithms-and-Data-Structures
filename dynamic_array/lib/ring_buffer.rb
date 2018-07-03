@@ -10,6 +10,7 @@ class RingBuffer
     @length = 0
   end
 
+  # to access the right value, you ned to index into its true index
   # O(1)
   def [](index)
     check_index(index)
@@ -49,6 +50,8 @@ class RingBuffer
 
     val = self[0]
     self[0] = nil
+
+    # reset start index to true start + 1
     self.start_idx = (start_idx + 1) % capacity
     self.length -= 1
 
