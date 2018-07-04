@@ -1,6 +1,5 @@
 class MaxIntSet
   def initialize(max)
-    @max = max
     @store = Array.new(max, false)
   end
 
@@ -20,12 +19,8 @@ class MaxIntSet
 
   private
 
-  def is_valid?(num)
-    num.between?(0, @max)
-  end
-
   def validate!(num)
-    raise "Out of bounds" unless is_valid?(num)
+    raise "Out of bounds" unless num.between?(0, @store.length - 1)
   end
 end
 
@@ -74,6 +69,7 @@ class ResizingIntSet
     resize! if @count == num_buckets
     self[num] << num
     @count += 1
+    
     num
   end
 
