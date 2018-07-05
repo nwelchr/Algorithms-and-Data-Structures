@@ -16,7 +16,7 @@ class BinaryMinHeap
     #pop off last value
     val = @store.pop
     #heapify down to reorganize tree
-    self.class.heapify_down(@store, 0, count, &@prc)
+    self.class.heapify_down(@store, 0, count, &prc)
     #return val
     val
   end
