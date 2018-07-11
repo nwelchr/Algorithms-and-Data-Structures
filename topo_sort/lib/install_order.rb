@@ -19,15 +19,15 @@ def install_order(arr)
     vertices = (1..max).to_a.map { |val| Vertex.new(val) }
 
     arr.each do |tuple|
-        from_idx = vertices.index { |v| v.value == tuple[1] }
-        to_idx = vertices.index { |v| v.value == tuple[0] }
+        from_idx = tuple[1] - 1
+        to_idx = tuple[0] - 1
         from, to = vertices[from_idx], vertices[to_idx]
         Edge.new(from, to)
     end
 
-    sorted = topological_sort(vertices).map
+    sorted = topological_sort(vertices)
 
-    sorted.map { |v| v.value }
+    p sorted.map { |v| v.value }
 end
 
 def install_order2(arr)
