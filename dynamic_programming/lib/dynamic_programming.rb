@@ -110,7 +110,7 @@ class DynamicProgramming
           # first option: entry considering previous item at this capacity
           option1 = solution_table[i][j - 1]
           
-          # second option: assuming enough capacity, the maximized value of the smller bag
+          # second option: assuming enough capacity, the maximized value of the smaller bag
           # this is where we go up and left
           option2 = i < weights[j] ? 0 : solution_table[i - weights[j]][j - 1] + values[j]
 
@@ -153,6 +153,7 @@ class DynamicProgramming
 
   #   @maze_cache
   # end
+  
 
   def maze_solver(maze, start_pos, end_pos)
     @maze_cache[start_pos] = nil
